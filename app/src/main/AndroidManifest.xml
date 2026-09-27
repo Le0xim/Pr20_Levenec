@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Pr20_Levenec"
         tools:ignore="DataExtractionRules">
 
-        <!-- Стартовый экран — теперь он запускается первым -->
+        <!-- Стартовый экран — заставка -->
         <activity
             android:name=".StartScreenActivity"
             android:screenOrientation="portrait"
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Основной экран — открывается после заставки -->
+        <!-- Основной экран игры -->
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"

@@ -1,24 +1,93 @@
 package com.example.pr20_levenec;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    public boolean Started = false;
+    public boolean Finished = false;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
+        // Скрытие ActionBar и переключение в полноэкранный режим
+        try {
+            Objects.requireNonNull(this.getSupportActionBar()).hide();
+        } catch (NullPointerException ignored) {}
+
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    // Метод нажатия на кнопку Старт/Пауза/Заново
+    public void Start(View view) {
+        Button button = findViewById(R.id.btnStart);
+
+        if (!Finished) {
+            if (!Started) {
+                button.setBackgroundColor(Color.RED);
+                button.setText("Пауза");
+                Started = true;
+            } else {
+                button.setBackgroundColor(Color.GREEN);
+                button.setText("Старт");
+                Started = false;
+            }
+        } else {
+            // Перезапуск активности при завершении игры
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+    public void Drive1(View view) {
+        Button button = findViewById(R.id.btnStart);
+        View Car = findViewById(R.id.Car1);
+        TextView result = findViewById(R.id.tvResult);
+
+        if (Started && !Finished) {
+            ViewGroup.MarginLayoutParams margin = (ViewGroup.MarginLayoutParams) Car.getLayoutParams();
+            margin.leftMargin += 40;
+            margin.rightMargin -= 40;
+            Car.requestLayout();
+
+            if (margin.rightMargin <= -100) {
+                result.setText("Победа 1 игрока");
+                button.setText("Заново");
+                result.setTextColor(0xFFE91E63);
+                Finished = true;
+            }
+        }
+    }
+
+    public void Drive2(View view) {
+        Button button = findViewById(R.id.btnStart);
+        View Car = findViewById(R.id.Car2);
+        TextView result = findViewById(R.id.tvResult);
+
+        if (Started && !Finished) {
+            ViewGroup.MarginLayoutParams margin = (ViewGroup.MarginLayoutParams) Car.getLayoutParams();
+            margin.leftMargin += 40;
+            margin.rightMargin -= 40;
+            Car.requestLayout();
+
+            if (margin.rightMargin <= -100) {
+                result.setText("Победа 2 игрока");
+                button.setText("Заново");
+                result.setTextColor(0xFFFF0000);
+                Finished = true;
+            }
+        }
     }
 }

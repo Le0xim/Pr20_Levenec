@@ -8,20 +8,7 @@
     android:background="#666666"
     tools:context=".MainActivity">
 
-    <!-- Верхняя полоса дороги -->
-
-    <!-- Нижняя полоса дороги -->
-
-    <!-- Разделительная линия -->
-
-    <!-- Финишная клетка справа -->
-
-    <!-- Верхняя машина -->
-
-    <!-- Нижняя машина -->
-
-    <!-- Панель кнопок -->
-
+    <!-- Дорога сверху -->
     <View
         android:id="@+id/roadTop"
         android:layout_width="850dp"
@@ -36,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="VisualLintBounds" />
 
+    <!-- Дорога снизу -->
     <View
         android:id="@+id/roadBottom"
         android:layout_width="850dp"
@@ -50,16 +38,29 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="VisualLintBounds" />
 
+    <!-- Поле вывода результата победителя -->
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Кнопка Старт/Пауза/Заново -->
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="93dp"
+        android:layout_width="110dp"
         android:layout_height="52dp"
         android:layout_marginStart="390dp"
         android:layout_marginTop="318dp"
         android:layout_marginEnd="408dp"
         android:layout_marginBottom="41dp"
-        android:layout_weight="1"
         android:backgroundTint="@color/green"
+        android:onClick="Start"
         android:text="@string/text1"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,16 +69,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <!-- Кнопка Ехать для Игрока 1 (Верхняя машина) -->
     <Button
-        android:id="@+id/btnRight"
+        android:id="@+id/btnDrive1"
         android:layout_width="101dp"
         android:layout_height="49dp"
         android:layout_marginStart="152dp"
         android:layout_marginTop="318dp"
         android:layout_marginEnd="638dp"
         android:layout_marginBottom="44dp"
-        android:layout_weight="1"
         android:backgroundTint="@color/purple"
+        android:onClick="Drive1"
         android:text="@string/text2"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,17 +88,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
+    <!-- Кнопка Ехать для Игрока 2 (Нижняя машина) -->
     <Button
-        android:id="@+id/btnLeft"
+        android:id="@+id/btnDrive2"
         android:layout_width="97dp"
         android:layout_height="51dp"
         android:layout_marginStart="608dp"
         android:layout_marginTop="318dp"
         android:layout_marginEnd="186dp"
         android:layout_marginBottom="42dp"
-        android:layout_weight="1"
         android:backgroundTint="@color/red"
-        android:text="@string/text2"
+        android:onClick="Drive2"
+        android:text="@string/text3"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,8 +107,9 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <!-- Верхняя машина -->
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/Car1"
         android:layout_width="39dp"
         android:layout_height="114dp"
         android:layout_marginStart="24dp"
@@ -120,8 +124,9 @@
         app:srcCompat="@drawable/first_car"
         tools:ignore="ContentDescription" />
 
+    <!-- Нижняя машина -->
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/Car2"
         android:layout_width="47dp"
         android:layout_height="193dp"
         android:layout_marginStart="24dp"
